@@ -1,8 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
-const TelegramBot2 = require("telegram-bot-api");
-const { idText } = require("typescript");
 
 const {
   getToken,
@@ -15,12 +13,6 @@ const mainChat = +process.env.CHAT_ID;
 let idLastProposal;
 
 const bot = new TelegramBot(token, { polling: true });
-const api = new TelegramBot2({
-  token: token,
-  updates: {
-    enabled: true,
-  },
-});
 
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
@@ -45,7 +37,7 @@ bot.on("message", async (msg) => {
   setTimeout(async () => {
     try {
       let id = idLastProposal + 10;
-      while (id - idLastProposal >-20) {
+      while (id - idLastProposal > -20) {
         try {
           await bot.deleteMessage(chatId, id);
         } catch (error) {}
